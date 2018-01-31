@@ -6,12 +6,12 @@ Using GCC is not complicated but we slowly will start to use Makefiles. By the l
 http://mrbook.org/blog/tutorials/make/
 I recommend start to learn how to use Makefiles as starting from the next homework you will need to write your own.
 
-Most likely 'make' is not yet supported in your VM so please install it
+Most likely 'make' is not yet installed in your VM so please install it
 ```
 sudo apt-get install make
 ```
 
-In your new repository you will have hidden file for Travis CI. Please don't modify it unless I specifically ask. You also will have a `main.c` file. You will use for development (feel free to use more *.h files and *.c if needed). You also may see Makefile.config. Please put your data into that file in the appropriate fields. In case you will be doing any of the extra credit options please change corresponding value in this file from zero to one.
+In your new repository you will have hidden file for Travis CI. Please don't modify it unless we specifically ask. You also will have a `main.c` file. You will use it for development (feel free to use more *.h files and *.c if needed). You also may see Makefile.config. Please put your data into that file in the appropriate fields. In case you will be doing any of the extra credit options please change corresponding value in this file from zero to one.
 
 You also can see Makefile file. It helps to build you programin by issuing a simple command
 ```
@@ -40,5 +40,15 @@ Examples of correct input
 Then imagine we are trying to print everyone in the database. We should see following results
 ```
 3 John Doe 3.43 AMS
+5 Mary Jane 3.87 ART
+```
+
+ - ADD 3 john doe 3.43 AMS
+ - ADD 5 mary jane 3.87 ART
+ - UPDATE 3 john Wonka 3.41 AMS
+
+Then imagine we are trying to print everyone in the database. We should see following results
+```
+3 John Wonka 3.41 AMS
 5 Mary Jane 3.87 ART
 ```
