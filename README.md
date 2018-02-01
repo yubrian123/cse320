@@ -28,7 +28,7 @@ You program is supposed to printf `ID NOT UNIQUE`.
 
  - ADD 3 john doe 3.43 AMS
  - ADD 5 mary jane 3.87 ART
- - DELETE 4 willy Wonka 4.0 MAT
+ - DELETE 4
  
 Now you should see `STUDENT  RECORD  CANNOT  BE  DELETED  NOR  UPDATED`.
 
