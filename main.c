@@ -1,9 +1,23 @@
 #include <stdio.h>
 
+typedef struct
+ student_records{
+
+ int id;
+ char[10] first_name;
+ char[10} last_name;
+ float gpa;
+ char[3} major;
+
+ struct student_records* next;
+}
+
 int main(int argc, char** argv) {
   /*
   * Dummy values
   */
+
+  student_record* head;
   int id = 1;
   char* first_name = "Sergey";
   char* last_name = "Madaminov";
