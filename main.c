@@ -107,6 +107,17 @@ void printByID(student_records* head, int id)
 		printf("STUDENT RECORDS NOT FOUND \n");
 	}
 }
+
+void printByLastName(student_records* head, char *p)
+{
+	printf("print by last name");
+}
+
+void printByMajor(student_records* head, char *p)
+{
+        printf("print by major");
+}
+
 int main(int argc, char** argv) {
   /*
   * Dummy values
@@ -138,6 +149,8 @@ int main(int argc, char** argv) {
   char *cvalue = NULL;
   int valueOfID;
   int printId;
+  int lengthOfLastName;
+  int lengthOfMajor;
 
   while((c = getopt(argc, argv, "vi:f:m:o:")) != -1)
   {
@@ -153,15 +166,26 @@ int main(int argc, char** argv) {
                 	printByID(head, printId);
         }
         else if(c == 'f'){
-                printf("WE GOT A F");
+		cvalue = optarg;
+		lengthOfLastName = getStringLength(cvalue);
+		if(lengthOfLastName > 10 || lengthOfLastName < 3)
+			printf("OTHER ERROR");
+		else
+                	printByLastName(head, cvalue);
         }
         else if(c == 'm'){
-                printf("WE GOT A M");
+                cvalue = optarg;
+		lengthOfMajor = getStringLength(cvalue);
+                if(lengthOfMajor != 3)
+                        printf("OTHER ERROR");
+                else
+                	printByMajor(head, cvalue);
         }
         else if(c == 'o'){
                 printf("WE GOT A O");
         }
-
+	else
+		printf("NO QUERY PROVIDED \n");
   }
   return 0;
 }
