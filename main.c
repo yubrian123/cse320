@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <ctype.h>
 
 typedef struct
  student_records{
@@ -14,179 +15,587 @@ typedef struct
  struct student_records* next;
 }student_records;
 
-student_records* create(student_records* next, int id,
-char* first_name, char* last_name, float gpa, char* major){
+student_records* create(int id, char* first_name, char* last_name, float gpa, char* major){
         student_records* new_student_records = (student_records*)malloc(sizeof(student_records));
+        if(new_student_records == NULL)
+        {
+                printf("Error creating a new Student Record.\n");
+                exit(0);
+        }
         new_student_records->id = id;
         new_student_records->first_name = first_name;
         new_student_records->last_name = last_name;
         new_student_records->gpa = gpa;
         new_student_records->major = major;
-        if(next == NULL)
-        {
-                new_student_records->next = NULL;
-        }
-        else
-        {
-                new_student_records->next = NULL;
-        }
         return new_student_records;
 }
 
-/*student_records* add(student_records* head, int id,
-char* first_name, char* last_name, float gpa, char* major){
-        if(id < 0)
-                return
-
-        student_records* cursor = head;
-        while(cursor != null)
-        {
-                if(cursor->id = id){
-                        printf("ID NOT UNIQUE");
-                        return
-                }
-
-        }
-        student_records* new_student_records = create(id, first_name, last_name, gpa, major);
-
-}*/
 void printAll(student_records* head)
 {
         student_records* cursor = head;
         while(cursor != NULL)
         {
                  printf("%d %s %s %.2f %s\n", cursor->id, cursor->first_name, cursor->last_name, cursor->gpa, cursor->major);
-                cursor = cursor->next;
-        }
-}
+                 cursor = cursor->next;
+         }
+ }
 
-int getStringLength(char *p)
-{
-        int c=0;
-        while(*p!= '\0')
+ int getStringLength(char *p)
+ {
+         int c=0;
+         char *temp = p;
+         while(*temp!= '\0')
+         {
+                 c++;
+                 temp++;
+         }
+         return c;
+ }
+
+ int checkIfAllInts(char *p)
+ {
+         int c = 0;
+         char *temp = p;
+         while(*temp != '\0')
+         {
+                 if((*temp <= '0') || (*temp >= '9'))
+                 {
+                         return c;
+                 }
+                 *temp++;
+         }
+         return 1;
+ }
+
+ int checkIfAllChars(char *p)
+ {
+         int c = 0;
+         char* temp = p;
+         while(*temp != '\0')
+         {
+                 if((*temp >= 'a') && (*temp <= 'z'))
+                 {
+                         temp++;
+                 }
+                 else if((*temp >= 'A' ) && (*temp <= 'Z'))
+                         temp++;
+                 else return c;
+         }
+         return 1;
+ }
+
+ int checkIfValidGPA(char *p)
+ {
+        int c = 0;
+        char* temp = p;
+        if((*temp <= '0') || (*temp >= '9'))
         {
-                c++;
-                *p++;
+                return c;
         }
-        return c;
-}
-
-int getValueOfId(char *p)
-{
-	int i = 0, len, j;
-	len = getStringLength(p);
-	if(*p == '-')
-	{
-		return -1;
-	}
-	if(*p == '0')
-	{
-		return 0;
-	}
-	while(*p!= '\0')
-	{
-		j = j * 10 +(*p - '0');
-		*p++;
-	}
-	return j;
-}
-
-void printByID(student_records* head, int id)
-{
-        student_records* cursor = head;
-	int ifprinted = 0;
-        while(cursor != NULL)
+        temp++;
+        if(*temp != '.')
         {
-                if(cursor->id == id){
-                	 printf("%d %s %s %.2f %s\n", cursor->id, cursor->first_name, cursor->last_name, cursor->gpa, cursor->major);
-			ifprinted++;
-                }
-                cursor = cursor->next;
+                return c;
         }
-	if(ifprinted == 0){
-		printf("STUDENT RECORDS NOT FOUND \n");
-	}
-}
+        temp++;
+        if((*temp <= '0') || (*temp >= '9'))
+        {
+                return c;
+        }
+        temp++;
+        if((*temp <= '0') || (*temp >= '9'))
+        {
+                return c;
+        }
+        return 1;
+ }
 
-void printByLastName(student_records* head, char *p)
-{
-	printf("print by last name");
-}
+ int getValueOfId(char *p)
+ {
+   return atoi(p);
+ }
+ float getValueOfGPA(char *p)
+ {
+   return atof(p);
+ }
 
-void printByMajor(student_records* head, char *p)
-{
-        printf("print by major");
-}
-
-int main(int argc, char** argv) {
-  /*
-  * Dummy values
-  */
-
-  student_records* next = NULL;
-  int id = 1;
-  char* first_name = "Sergey";
-  char* last_name = "Madaminov";
-  float gpa = 3.41;
-  char* major = "CSE";
-  student_records* head = create(next, id, first_name, last_name, gpa, major);
-
-  student_records* next1 = NULL;
-  int id1 = 2;
-  char* first_name1 = "Se2rgey";
-  char* last_name1 = "Mada2minov";
-  float gpa1 = 3.411;
-  char* major1 = "C1SE";
-  student_records* head1 = create(next1, id1, first_name1, last_name1, gpa1, major1);
-  head->next = head1;
-
-  /*
-  * This formatting for the string
-  * that you are expected to follow
-  */
-
-  int c;
-  char *cvalue = NULL;
-  int valueOfID;
-  int printId;
-  int lengthOfLastName;
-  int lengthOfMajor;
-
-  while((c = getopt(argc, argv, "vi:f:m:o:")) != -1)
+ int compareStrings(char *stringOne, char *stringTwo)
+ {
+  char *stringOnePointer = stringOne;
+  char *stringTwoPointer = stringTwo;
+  if(getStringLength(stringOnePointer) == getStringLength(stringTwoPointer))
   {
-        if(c == 'v'){
-                printAll(head);
-        }
-        else if(c == 'i'){
-                cvalue = optarg;
-                printId = getValueOfId(cvalue);
-		if(printId <= 0)
-			printf("OTHER ERROR");
-		else
-                	printByID(head, printId);
-        }
-        else if(c == 'f'){
-		cvalue = optarg;
-		lengthOfLastName = getStringLength(cvalue);
-		if(lengthOfLastName > 10 || lengthOfLastName < 3)
-			printf("OTHER ERROR");
-		else
-                	printByLastName(head, cvalue);
-        }
-        else if(c == 'm'){
-                cvalue = optarg;
-		lengthOfMajor = getStringLength(cvalue);
-                if(lengthOfMajor != 3)
-                        printf("OTHER ERROR");
-                else
-                	printByMajor(head, cvalue);
-        }
-        else if(c == 'o'){
-                printf("WE GOT A O");
-        }
-	else
-		printf("NO QUERY PROVIDED \n");
+    while(*stringOnePointer != '\0' && *stringTwoPointer != '\0')
+    {
+          if(*stringOnePointer != *stringTwoPointer)
+          {
+                  return 0;
+          }
+          stringOnePointer++;
+          stringTwoPointer++;
+   }
+   printf("Same String All Upper");
+   return 1;
   }
   return 0;
 }
+
+void printCertainRecord(student_records* cursor)
+{
+    printf("%d %s %s %.2f %s\n", cursor->id, cursor->first_name, cursor->last_name, cursor->gpa, cursor->major);
+}
+
+
+void add(student_records* head, char* id, char* first_name, char* last_name, char* gpa, char* major)
+{
+    // Check if anything  student record u trying to correct is missing an arguement
+    if(id == NULL || first_name == NULL || last_name == NULL || gpa == NULL || major == NULL)
+    {
+            printf("OTHER ERROR \n");
+            exit(1);
+    }
+    //check if valid id
+    int valueOfID = getValueOfId(id);
+    if(valueOfID <= 0)
+    {
+            printf("OTHER ERROR \n");
+            exit(1);
+    }
+    if(checkIfAllInts(id) == 0)
+    {
+            printf("OTHER ERROR \n");
+            exit(1);
+    }
+    //check if valid first name
+    int lengthOfFirstName = getStringLength(first_name);
+    if(lengthOfFirstName > 10 || lengthOfFirstName < 3)
+    {
+            printf("OTHER ERROR \n");
+            exit(1);
+    }
+    if(checkIfAllChars(first_name) == 0)
+    {
+            printf("OTHER ERROR \n");
+            exit(1);
+    }
+    //check if valid last name
+    int lengthOfLastName = getStringLength(last_name);
+    if(lengthOfLastName > 10 || lengthOfLastName < 3)
+    {
+            printf("OTHER ERROR \n");
+            exit(1);
+    }
+    if(checkIfAllChars(last_name) == 0)
+    {
+            printf("OTHER ERROR \n");
+            exit(1);
+    }
+    //check if gpa is valid
+    int lengthOfGPA = getStringLength(gpa);
+    if(lengthOfGPA != 4)
+    {
+            printf("OTHER ERROR \n");
+            exit(1);
+    }
+    if(checkIfValidGPA(gpa) == 0)
+    {
+            printf("OTHER ERROR \n");
+            exit(1);
+    }
+    //check if valid major
+    int lengthOfMajor = getStringLength(major);
+    if(lengthOfMajor != 3)
+    {
+            printf("OTHER ERROR \n");
+            exit(1);
+    }
+    if(checkIfAllChars(major) == 0)
+    {
+            printf("OTHER ERROR \n");
+            exit(1);
+    }
+    student_records* pointer = head;
+    while(pointer != NULL)
+    {
+      if(pointer->id == valueOfID)
+      {
+        printf("ID NOT UNIQUE \n");
+        exit(1);
+      }
+      pointer = pointer->next;
+    }
+    float valueOfGPA = getValueOfGPA(gpa);
+    student_records* newStudentRecord = create(valueOfID, first_name, last_name, valueOfGPA, major);
+    student_records* pointer2 = head;
+    if(head == NULL)
+    {
+      head = newStudentRecord;
+    }
+    while(pointer2->next != NULL)
+    {
+      if((newStudentRecord->id > pointer2->id) && (newStudentRecord->id < pointer2->next->id))
+      {
+        newStudentRecord->next = pointer2->next;
+        pointer2->next = newStudentRecord;
+        return;
+      }
+      pointer2 = pointer2->next;
+    }
+    pointer2->next = newStudentRecord;
+}
+void update(student_records* head, char* id, char* first_name, char* last_name, char* gpa, char* major)
+{
+    // Check if anything  student record u trying to correct is missing an arguement
+    if(id == NULL || first_name == NULL || last_name == NULL || gpa == NULL || major == NULL)
+    {
+            printf("OTHER ERROR \n");
+            exit(1);
+    }
+    //check if valid id
+    int valueOfID = getValueOfId(id);
+    if(valueOfID <= 0)
+    {
+            printf("OTHER ERROR \n");
+            exit(1);
+    }
+    if(checkIfAllInts(id) == 0)
+    {
+            printf("OTHER ERROR \n");
+            exit(1);
+    }
+    //check if valid first name
+    int lengthOfFirstName = getStringLength(first_name);
+    if(lengthOfFirstName > 10 || lengthOfFirstName < 3)
+    {
+            printf("OTHER ERROR \n");
+            exit(1);
+    }
+    if(checkIfAllChars(first_name) == 0)
+    {
+            printf("OTHER ERROR \n");
+            exit(1);
+    }
+    //check if valid last name
+    int lengthOfLastName = getStringLength(last_name);
+    if(lengthOfLastName > 10 || lengthOfLastName < 3)
+    {
+            printf("OTHER ERROR \n");
+            exit(1);
+    }
+    if(checkIfAllChars(last_name) == 0)
+    {
+            printf("OTHER ERROR \n");
+            exit(1);
+    }
+    //check if gpa is valid
+    int lengthOfGPA = getStringLength(gpa);
+    if(lengthOfGPA != 4)
+    {
+            printf("OTHER ERROR \n");
+            exit(1);
+    }
+    if(checkIfValidGPA(gpa) == 0)
+    {
+            printf("OTHER ERROR \n");
+            exit(1);
+    }
+    //check if valid major
+    int lengthOfMajor = getStringLength(major);
+    if(lengthOfMajor != 3)
+    {
+            printf("OTHER ERROR \n");
+            exit(1);
+    }
+    if(checkIfAllChars(major) == 0)
+    {
+            printf("OTHER ERROR \n");
+            exit(1);
+    }
+    student_records* pointer = head;
+    float valueOfGPA = getValueOfGPA(gpa);
+    while(pointer != NULL)
+    {
+      if(pointer->id == valueOfID)
+      {
+        pointer->first_name = first_name;
+        pointer->last_name = last_name;
+        pointer->gpa = valueOfGPA;
+        pointer->major = major;
+        return;
+      }
+      pointer = pointer->next;
+    }
+    printf("STUDENT RECORDS CANNOT BE DELETED NOR UPDATED \n");
+    exit(1);
+  }
+
+  student_records* delete(student_records* head, char* id)
+  {
+    if(id == NULL)
+    {
+            printf("OTHER ERROR \n");
+            exit(1);
+    }
+    int valueOfID = getValueOfId(id);
+    if(valueOfID <= 0)
+    {
+            printf("OTHER ERROR \n");
+            exit(1);
+    }
+    if(checkIfAllInts(id) == 0)
+    {
+            printf("OTHER ERROR \n");
+            exit(1);
+    }
+    student_records* pointer2 = head;
+    if(pointer2 == NULL)
+    {
+      printf("STUDENT RECORDS CANNOT BE DELETED NOR UPDATED \n");
+      exit(1);
+    }
+    if(pointer2->id == valueOfID)
+    {
+      if(pointer2->next == NULL)
+      {
+        head = NULL;
+      }
+      else
+      {
+        head = pointer2->next;
+      }
+      free(pointer2);
+      return head;
+    }
+    while(pointer2->next != NULL)
+    {
+      if(pointer2->next->id == valueOfID)
+      {
+        student_records* temp = pointer2->next;
+        if(pointer2->next->next != NULL)
+        {
+          pointer2->next = pointer2->next->next;
+        }
+        else
+        {
+          pointer2->next = NULL;
+        }
+        free(temp);
+        return head;
+      }
+      pointer2 = pointer2->next;
+    }
+    printf("STUDENT RECORDS CANNOT BE DELETED NOR UPDATED \n");
+    exit(1);
+  }
+         int main(int argc, char** argv) {
+           /*
+           * Dummy values
+           */
+
+           int id = 1;
+           char* first_name = "Sergey";
+           char* last_name = "Madaminov";
+           float gpa = 3.41;
+           char* major = "CSE";
+           student_records* head = create(id, first_name, last_name, gpa, major);
+
+           char* id1 = "2";
+           char* first_name1 = "Sesdsay";
+           char* last_name1 = "Madasdmv";
+           char* gpa1 = "3.11";
+           char* major1 = "CHE";
+           add(head, id1, first_name1, last_name1, gpa1, major1);
+
+           char* id2 = "5";
+           char* first_name2 = "Sesadsay";
+           char* last_name2 = "Madadsdmv";
+           char* gpa2 = "3.11";
+           char* major2 = "CDE";
+           add(head, id2, first_name2, last_name2, gpa2, major2);
+
+           char* id3 = "3";
+           char* first_name3 = "Ssadssay";
+           char* last_name3 = "Madfssdmv";
+           char* gpa3 = "3.12";
+           char* major3 = "CDE";
+           add(head, id3, first_name3, last_name3, gpa3, major3);
+
+           update(head, "2", "Sama", "Sama", "3.12", "CED");
+           head = delete(head, "1");
+
+           /*
+           * This formatting for the string
+           * that you are expected to follow
+           */
+
+           int c;
+           char *cvalue = NULL;
+           int valueOfID;
+           int printId;
+           int lengthOfLastName;
+           int lengthOfMajor;
+           int vFlag = 0;
+           int iFlag = 0;
+           int fFlag = 0;
+           int mFlag = 0;
+           int oFlag = 0;
+
+           char* iArg;
+           char* fArg;
+           char* mArg;
+           char* oArg;
+
+           char* inputFile = *(argv +1);
+           FILE *fp;
+           fp = fopen(inputFile, "r");
+           if(fp == NULL)
+           {
+              printf("OTHER ERROR");
+              exit(1);
+           }
+
+           while((c = getopt(argc, argv, "vi:f:m:o:")) != -1)
+           {
+                 if(c == 'v'){
+                        vFlag++;
+                 }
+                 else if(c == 'i'){
+                         iFlag++;
+                         iArg = optarg;
+                         if(iArg == NULL)
+                         {
+                                 printf("OTHER ERROR \n");
+                                 exit(1);
+                         }
+                         printId = getValueOfId(iArg);
+                         if(printId <= 0)
+                         {
+                                 printf("OTHER ERROR \n");
+                                 exit(1);
+                         }
+                         else if(checkIfAllInts(iArg) == 0)
+                         {
+                                 printf("OTHER ERROR \n");
+                                 exit(1);
+                         }
+                 }
+                 else if(c == 'f'){
+                         fFlag++;
+                         fArg = optarg;
+                         if(fArg == NULL)
+                         {
+                                 printf("OTHER ERROR \n");
+                                 exit(1);
+                         }
+                         lengthOfLastName = getStringLength(fArg);
+                         if(lengthOfLastName > 10 || lengthOfLastName < 3)
+                         {
+                                 printf("OTHER ERROR \n");
+                                 exit(1);
+                         }
+                         else if(checkIfAllChars(fArg) == 0)
+                         {
+                                 printf("OTHER ERROR \n");
+                                 exit(1);
+                         }
+                 }
+                 else if(c == 'm'){
+                         mArg = optarg;
+                         mFlag++;
+                         if(mArg == NULL)
+                         {
+                                 printf("OTHER ERROR \n");
+                                 exit(1);
+                         }
+                         lengthOfMajor = getStringLength(mArg);
+                         if(lengthOfMajor != 3)
+                         {
+                                 printf("OTHER ERROR \n");
+                                 exit(1);
+                         }
+                         else if(checkIfAllChars(mArg) == 0)
+                         {
+                                 printf("OTHER ERROR \n");
+                                 exit(1);
+                         }
+                  }
+                  else if(c == 'o'){
+                         oFlag++;
+                         oArg = optarg;
+                         if(oArg == NULL)
+                         {
+                           printf("OTHER ERROR \n");
+                           exit(1);
+                         }
+
+                  }
+                  else
+                        printf("NO QUERY PROVIDED \n");
+   }
+
+   if(vFlag == 1)
+   {
+     if(iFlag == 1)
+     {
+       printf("OTHER ERROR \n");
+       exit(1);
+     }
+     else if(fFlag == 1)
+     {
+       printf("OTHER ERROR \n");
+       exit(1);
+     }
+     else if(mFlag == 1)
+     {
+       printf("OTHER ERROR \n");
+       exit(1);
+     }
+     else if(oFlag == 1)
+     {
+       //parseToFile();
+     }
+     else
+        printAll(head);
+    }
+    else if(iFlag == 1)
+    {
+      if(fFlag == 1)
+      {
+        student_records* pointer = head;
+        while(pointer != NULL)
+        {
+          if(pointer->id == getValueOfId(iArg))
+          {
+            if(compareStrings(pointer->last_name, fArg) == 1)
+            {
+                printCertainRecord(pointer);
+                exit(0);
+            }
+          }
+          pointer = pointer->next;
+        }
+        printf("STUDENT RECORD NOT FOUND \n");
+        exit(0);
+      }
+        if(mFlag == 1)
+        {
+          student_records* pointer = head;
+          while(pointer != NULL)
+          {
+            if(pointer->id = getValueOfId(iArg))
+            {
+              if(compareStrings(pointer->major, mArg) == 1)
+              {
+                  printCertainRecord(pointer);
+                  exit(0);
+              }
+            }
+            pointer = pointer->next;
+          }
+          printf("STUDENT RECORD NOT FOUND \n");
+          exit(0);
+        }
+      }
+   return 0;
+ }
 
