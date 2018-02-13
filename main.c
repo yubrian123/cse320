@@ -151,67 +151,67 @@ void add(student_records* head, char* id, char* first_name, char* last_name, cha
     // Check if anything  student record u trying to correct is missing an arguement
     if(id == NULL || first_name == NULL || last_name == NULL || gpa == NULL || major == NULL)
     {
-            printf("OTHER ERROR \n");
+            printf("OTHER ERROR\n");
             exit(1);
     }
     //check if valid id
     int valueOfID = getValueOfId(id);
     if(valueOfID <= 0)
     {
-            printf("OTHER ERROR \n");
+            printf("OTHER ERROR\n");
             exit(1);
     }
     if(checkIfAllInts(id) == 0)
     {
-            printf("OTHER ERROR \n");
+            printf("OTHER ERROR\n");
             exit(1);
     }
     //check if valid first name
     int lengthOfFirstName = getStringLength(first_name);
     if(lengthOfFirstName > 10 || lengthOfFirstName < 3)
     {
-            printf("OTHER ERROR \n");
+            printf("OTHER ERROR\n");
             exit(1);
     }
     if(checkIfAllChars(first_name) == 0)
     {
-            printf("OTHER ERROR \n");
+            printf("OTHER ERROR\n");
             exit(1);
     }
     //check if valid last name
     int lengthOfLastName = getStringLength(last_name);
     if(lengthOfLastName > 10 || lengthOfLastName < 3)
     {
-            printf("OTHER ERROR \n");
+            printf("OTHER ERROR\n");
             exit(1);
     }
     if(checkIfAllChars(last_name) == 0)
     {
-            printf("OTHER ERROR \n");
+            printf("OTHER ERROR\n");
             exit(1);
     }
     //check if gpa is valid
     int lengthOfGPA = getStringLength(gpa);
     if(lengthOfGPA != 4)
     {
-            printf("OTHER ERROR \n");
+            printf("OTHER ERROR\n");
             exit(1);
     }
     if(checkIfValidGPA(gpa) == 0)
     {
-            printf("OTHER ERROR \n");
+            printf("OTHER ERROR\n");
             exit(1);
     }
     //check if valid major
     int lengthOfMajor = getStringLength(major);
     if(lengthOfMajor != 3)
     {
-            printf("OTHER ERROR \n");
+            printf("OTHER ERROR\n");
             exit(1);
     }
     if(checkIfAllChars(major) == 0)
     {
-            printf("OTHER ERROR \n");
+            printf("OTHER ERROR\n");
             exit(1);
     }
     student_records* pointer = head;
@@ -219,7 +219,7 @@ void add(student_records* head, char* id, char* first_name, char* last_name, cha
     {
       if(pointer->id == valueOfID)
       {
-        printf("ID NOT UNIQUE \n");
+        printf("ID NOT UNIQUE\n");
         exit(1);
       }
       pointer = pointer->next;
@@ -251,67 +251,67 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
     // Check if anything  student record u trying to correct is missing an arguement
     if(id == NULL || first_name == NULL || last_name == NULL || gpa == NULL || major == NULL)
     {
-            printf("OTHER ERROR \n");
+            printf("OTHER ERROR\n");
             exit(1);
     }
     //check if valid id
     int valueOfID = getValueOfId(id);
     if(valueOfID <= 0)
     {
-            printf("OTHER ERROR \n");
+            printf("OTHER ERROR\n");
             exit(1);
     }
     if(checkIfAllInts(id) == 0)
     {
-            printf("OTHER ERROR \n");
+            printf("OTHER ERROR\n");
             exit(1);
     }
     //check if valid first name
     int lengthOfFirstName = getStringLength(first_name);
     if(lengthOfFirstName > 10 || lengthOfFirstName < 3)
     {
-            printf("OTHER ERROR \n");
+            printf("OTHER ERROR\n");
             exit(1);
     }
     if(checkIfAllChars(first_name) == 0)
     {
-            printf("OTHER ERROR \n");
+            printf("OTHER ERROR\n");
             exit(1);
     }
     //check if valid last name
     int lengthOfLastName = getStringLength(last_name);
     if(lengthOfLastName > 10 || lengthOfLastName < 3)
     {
-            printf("OTHER ERROR \n");
+            printf("OTHER ERROR\n");
             exit(1);
     }
     if(checkIfAllChars(last_name) == 0)
     {
-            printf("OTHER ERROR \n");
+            printf("OTHER ERROR\n");
             exit(1);
     }
     //check if gpa is valid
     int lengthOfGPA = getStringLength(gpa);
     if(lengthOfGPA != 4)
     {
-            printf("OTHER ERROR \n");
+            printf("OTHER ERROR\n");
             exit(1);
     }
     if(checkIfValidGPA(gpa) == 0)
     {
-            printf("OTHER ERROR \n");
+            printf("OTHER ERROR\n");
             exit(1);
     }
     //check if valid major
     int lengthOfMajor = getStringLength(major);
     if(lengthOfMajor != 3)
     {
-            printf("OTHER ERROR \n");
+            printf("OTHER ERROR\n");
             exit(1);
     }
     if(checkIfAllChars(major) == 0)
     {
-            printf("OTHER ERROR \n");
+            printf("OTHER ERROR\n");
             exit(1);
     }
     student_records* pointer = head;
@@ -328,7 +328,7 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
       }
       pointer = pointer->next;
     }
-    printf("STUDENT RECORDS CANNOT BE DELETED NOR UPDATED \n");
+    printf("STUDENT RECORDS CANNOT BE DELETED NOR UPDATED\n");
     exit(1);
   }
 
@@ -336,24 +336,24 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
   {
     if(id == NULL)
     {
-            printf("OTHER ERROR \n");
+            printf("OTHER ERROR\n");
             exit(1);
     }
     int valueOfID = getValueOfId(id);
     if(valueOfID <= 0)
     {
-            printf("OTHER ERROR \n");
+            printf("OTHER ERROR\n");
             exit(1);
     }
     if(checkIfAllInts(id) == 0)
     {
-            printf("OTHER ERROR \n");
+            printf("OTHER ERROR\n");
             exit(1);
     }
     student_records* pointer2 = head;
     if(pointer2 == NULL)
     {
-      printf("STUDENT RECORDS CANNOT BE DELETED NOR UPDATED \n");
+      printf("STUDENT RECORDS CANNOT BE DELETED NOR UPDATED\n");
       exit(1);
     }
     if(pointer2->id == valueOfID)
@@ -387,7 +387,7 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
       }
       pointer2 = pointer2->next;
     }
-    printf("STUDENT RECORDS CANNOT BE DELETED NOR UPDATED \n");
+    printf("STUDENT RECORDS CANNOT BE DELETED NOR UPDATED\n");
     exit(1);
   }
          int main(int argc, char** argv) {
@@ -471,168 +471,168 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
            while(fgets(lineByLine, 255, fp) != NULL)
            {
              sscanf(lineByLine, "%s %s %s %s %s %s", command, readId, readFirst, readLast, readGPA, readMajor);
-             if(command == NULL)             
-	     {
-		printf("FAILED TO PARSE FILE \n");
-                exit(1);
+             if(command == NULL)
+             {
+               printf("Command Was Null\n");
              }
              if(compareStrings(addCommand, command) == 1)
              {
                  if(readId == NULL || readFirst == NULL || readLast == NULL || readGPA == NULL || readMajor == NULL)
                  {
-                         printf("FAILED TO PARSE FILE \n");
+                         printf("FAILED TO PARSE FILE\n");
                          exit(1);
                  }
                  //check if valid id
                  int valueOfID = getValueOfId(readId);
                  if(valueOfID <= 0)
                  {
-                         printf("FAILED TO PARSE FILE \n");
+                         printf("FAILED TO PARSE FILE\n");
                          exit(1);
                  }
                  if(checkIfAllInts(readId) == 0)
                  {
-                         printf("FAILED TO PARSE FILE \n");
+                         printf("FAILED TO PARSE FILE\n");
                          exit(1);
                  }
                  //check if valid first name
                  int lengthOfFirstName = getStringLength(readFirst);
                  if(lengthOfFirstName > 10 || lengthOfFirstName < 3)
                  {
-                         printf("FAILED TO PARSE FILE \n");
+                         printf("FAILED TO PARSE FILE\n");
                          exit(1);
                  }
                  if(checkIfAllChars(readFirst) == 0)
                  {
-                         printf("FAILED TO PARSE FILE \n");
+                         printf("FAILED TO PARSE FILE\n");
                          exit(1);
                  }
                  //check if valid last name
                  int lengthOfLastName = getStringLength(readLast);
                  if(lengthOfLastName > 10 || lengthOfLastName < 3)
                  {
-                         printf("FAILED TO PARSE FILE \n");
+                         printf("FAILED TO PARSE FILE\n");
                          exit(1);
                  }
                  if(checkIfAllChars(readLast) == 0)
                  {
-                         printf("FAILED TO PARSE FILE \n");
+                         printf("FAILED TO PARSE FILE\n");
                          exit(1);
                  }
                  //check if gpa is valid
                  int lengthOfGPA = getStringLength(readGPA);
                  if(lengthOfGPA != 4)
                  {
-                         printf("FAILED TO PARSE FILE \n");
+                         printf("FAILED TO PARSE FILE\n");
                          exit(1);
                  }
                  if(checkIfValidGPA(readGPA) == 0)
                  {
-                         printf("FAILED TO PARSE FILE \n");
+                         printf("FAILED TO PARSE FILE\n");
                          exit(1);
                  }
                  //check if valid major
                  int lengthOfMajor = getStringLength(readMajor);
                  if(lengthOfMajor != 3)
                  {
-                         printf("FAILED TO PARSE FILE \n");
+                         printf("FAILED TO PARSE FILE\n");
                          exit(1);
                  }
                  if(checkIfAllChars(readMajor) == 0)
                  {
-                         printf("FAILED TO PARSE FILE \n");
+                         printf("FAILED TO PARSE FILE\n");
                          exit(1);
                  }
                  add(head, readId, readFirst, readLast, readGPA, readMajor);
+                 printf("Added Student\n");
                  }
                  else if(compareStrings(updateCommand, command) == 1)
                  {
                    if(readId == NULL || readFirst == NULL || readLast == NULL || readGPA == NULL || readMajor == NULL)
                    {
-                           printf("FAILED TO PARSE FILE \n");
+                           printf("FAILED TO PARSE FILE\n");
                            exit(1);
                    }
                    //check if valid id
                    int valueOfID = getValueOfId(readId);
                    if(valueOfID <= 0)
                    {
-                           printf("FAILED TO PARSE FILE \n");
+                           printf("FAILED TO PARSE FILE\n");
                            exit(1);
                    }
                    if(checkIfAllInts(readId) == 0)
                    {
-                           printf("FAILED TO PARSE FILE \n");
+                           printf("FAILED TO PARSE FILE\n");
                            exit(1);
                    }
                    //check if valid first name
                    int lengthOfFirstName = getStringLength(readFirst);
                    if(lengthOfFirstName > 10 || lengthOfFirstName < 3)
                    {
-                           printf("FAILED TO PARSE FILE \n");
+                           printf("FAILED TO PARSE FILE\n");
                            exit(1);
                    }
                    if(checkIfAllChars(readFirst) == 0)
                    {
-                           printf("FAILED TO PARSE FILE \n");
+                           printf("FAILED TO PARSE FILE\n");
                            exit(1);
                    }
                    //check if valid last name
                    int lengthOfLastName = getStringLength(readLast);
                    if(lengthOfLastName > 10 || lengthOfLastName < 3)
                    {
-                           printf("FAILED TO PARSE FILE \n");
+                           printf("FAILED TO PARSE FILE\n");
                            exit(1);
                    }
                    if(checkIfAllChars(readLast) == 0)
                    {
-                           printf("FAILED TO PARSE FILE \n");
+                           printf("FAILED TO PARSE FILE\n");
                            exit(1);
                    }
                    //check if gpa is valid
                    int lengthOfGPA = getStringLength(readGPA);
                    if(lengthOfGPA != 4)
                    {
-                           printf("FAILED TO PARSE FILE \n");
+                           printf("FAILED TO PARSE FILE\n");
                            exit(1);
                    }
                    if(checkIfValidGPA(readGPA) == 0)
                    {
-                           printf("FAILED TO PARSE FILE \n");
+                           printf("FAILED TO PARSE FILE\n");
                            exit(1);
                    }
                    //check if valid major
                    int lengthOfMajor = getStringLength(readMajor);
                    if(lengthOfMajor != 3)
                    {
-                           printf("FAILED TO PARSE FILE \n");
+                           printf("FAILED TO PARSE FILE\n");
                            exit(1);
                    }
                    if(checkIfAllChars(readMajor) == 0)
                    {
-                           printf("FAILED TO PARSE FILE \n");
+                           printf("FAILED TO PARSE FILE\n");
                            exit(1);
                    }
                    update(head, readId, readFirst, readLast, readGPA, readMajor);
-                   printf("Update Command \n");
+                   printf("Update Command\n");
                  }
                  else if(compareStrings(deleteCommand, command) == 1)
                  {
                    int valueOfID = getValueOfId(readId);
                    if(valueOfID <= 0)
                    {
-                           printf("FAILED TO PARSE FILE \n");
+                           printf("FAILED TO PARSE FILE\n");
                            exit(1);
                    }
                    if(checkIfAllInts(readId) == 0)
                    {
-                           printf("FAILED TO PARSE FILE \n");
+                           printf("FAILED TO PARSE FILE\n");
                            exit(1);
                    }
                    head = delete(head, readId);
                  }
                  else
                 {
-                  printf("FAILED TO PARSE FILE \n");
+                  printf("FAILED TO PARSE FILE\n");
                   exit(1);
                 }
           }
@@ -647,18 +647,18 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                          iArg = optarg;
                          if(iArg == NULL)
                          {
-                                 printf("OTHER ERROR \n");
+                                 printf("OTHER ERROR\n");
                                  exit(1);
                          }
                          printId = getValueOfId(iArg);
                          if(printId <= 0)
                          {
-                                 printf("OTHER ERROR \n");
+                                 printf("OTHER ERROR\n");
                                  exit(1);
                          }
                          else if(checkIfAllInts(iArg) == 0)
                          {
-                                 printf("OTHER ERROR \n");
+                                 printf("OTHER ERROR\n");
                                  exit(1);
                          }
                  }
@@ -667,18 +667,18 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                          fArg = optarg;
                          if(fArg == NULL)
                          {
-                                 printf("OTHER ERROR \n");
+                                 printf("OTHER ERROR\n");
                                  exit(1);
                          }
                          lengthOfLastName = getStringLength(fArg);
                          if(lengthOfLastName > 10 || lengthOfLastName < 3)
                          {
-                                 printf("OTHER ERROR \n");
+                                 printf("OTHER ERROR\n");
                                  exit(1);
                          }
                          else if(checkIfAllChars(fArg) == 0)
                          {
-                                 printf("OTHER ERROR \n");
+                                 printf("OTHER ERROR\n");
                                  exit(1);
                          }
                  }
@@ -687,18 +687,18 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                          mFlag++;
                          if(mArg == NULL)
                          {
-                                 printf("OTHER ERROR \n");
+                                 printf("OTHER ERROR\n");
                                  exit(1);
                          }
                          lengthOfMajor = getStringLength(mArg);
                          if(lengthOfMajor != 3)
                          {
-                                 printf("OTHER ERROR \n");
+                                 printf("OTHER ERROR\n");
                                  exit(1);
                          }
                          else if(checkIfAllChars(mArg) == 0)
                          {
-                                 printf("OTHER ERROR \n");
+                                 printf("OTHER ERROR\n");
                                  exit(1);
                          }
                   }
@@ -707,30 +707,30 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                          oArg = optarg;
                          if(oArg == NULL)
                          {
-                           printf("OTHER ERROR \n");
+                           printf("OTHER ERROR\n");
                            exit(1);
                          }
 
                   }
                   else
-                        printf("NO QUERY PROVIDED \n");
+                        printf("NO QUERY PROVIDED\n");
    }
 
    if(vFlag == 1)
    {
      if(iFlag == 1)
      {
-       printf("OTHER ERROR \n");
+       printf("OTHER ERROR\n");
        exit(1);
      }
      else if(fFlag == 1)
      {
-       printf("OTHER ERROR \n");
+       printf("OTHER ERROR\n");
        exit(1);
      }
      else if(mFlag == 1)
      {
-       printf("OTHER ERROR \n");
+       printf("OTHER ERROR\n");
        exit(1);
      }
      else if(oFlag == 1)
@@ -758,7 +758,7 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
           }
           pointer = pointer->next;
         }
-        printf("STUDENT RECORD NOT FOUND \n");
+        printf("STUDENT RECORD NOT FOUND\n");
         exit(0);
       }
         if(mFlag == 1)
@@ -776,7 +776,7 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
             }
             pointer = pointer->next;
           }
-          printf("STUDENT RECORD NOT FOUND \n");
+          printf("STUDENT RECORD NOT FOUND\n");
           exit(0);
         }
       }
