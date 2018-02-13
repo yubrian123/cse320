@@ -758,4 +758,3 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
       }
    return 0;
  }
-
