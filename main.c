@@ -426,23 +426,23 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
               exit(1);
            }
 
-           char* lineByLine = malloc(255);
-           char* command = malloc(255);
-           char* readId = malloc(255);
-           char* readFirst = malloc(255);
-           char* readLast = malloc(255);
-           char* readGPA = malloc(255);
-           char* readMajor = malloc(255);
            char* deleteCommand = "DELETE";
            char* addCommand = "ADD";
            char* updateCommand = "UPDATE";
+           char* lineByLine = malloc(255);
 
            while(fgets(lineByLine, 255, fp) != NULL)
            {
+             char* command = malloc(255);
+             char* readId = malloc(255);
+             char* readFirst = malloc(255);
+             char* readLast = malloc(255);
+             char* readGPA = malloc(255);
+             char* readMajor = malloc(255);
              sscanf(lineByLine, "%s %s %s %s %s %s", command, readId, readFirst, readLast, readGPA, readMajor);
              if(command == NULL)
              {
-               printf("Command Was Null\n");
+               printf("NO QUERY PROVIDED\n");
              }
              if(compareStrings(addCommand, command) == 1)
              {
@@ -513,8 +513,8 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                  }
                  if(head == NULL)
                  {
-		    float valueOfGPA = getValueOfGPA(readGPA);
-                    head = create(valueOfID, readFirst, readLast, valueOfGPA , readMajor);
+                    float valueOfGPA = getValueOfGPA(readGPA);
+                    head = create(valueOfID, readFirst, readLast, valueOfGPA, readMajor);
                  }
                  else
                  {
@@ -589,7 +589,6 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                            exit(1);
                    }
                    update(head, readId, readFirst, readLast, readGPA, readMajor);
-                   printf("Update Command\n");
                  }
                  else if(compareStrings(deleteCommand, command) == 1)
                  {
