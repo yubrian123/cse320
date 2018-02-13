@@ -519,7 +519,7 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                  }
                 else
                 {
-                  add(head, readId, readFirst, readLast, readGPA, readMajor);	
+                  add(head, readId, readFirst, readLast, readGPA, readMajor);
                 }
                  }
                  else if(compareStrings(updateCommand, command) == 1)
