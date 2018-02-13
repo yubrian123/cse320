@@ -1,0 +1,4 @@
+ADD 9 john doe 3.43 AMS
+ADD 8 mary jane 3.87 ART
+UPDATE 3 john Wonka 3.41 AMS
+DELETE 2
