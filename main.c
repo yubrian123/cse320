@@ -345,14 +345,18 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
              readGPA = malloc(255);
              readMajor = malloc(255);
              sscanf(lineByLine, "%s %s %s %s %s %s", command, readId, readFirst, readLast, readGPA, readMajor);
-             if(command == NULL)
-             {
-               printf("Command Was Null\n");
-             }
              if(compareStrings(addCommand, command) == 1)
              {
                  if(readId == NULL || readFirst == NULL || readLast == NULL || readGPA == NULL || readMajor == NULL)
                  {
+                         free(lineByLine);
+                         free(command);
+                         free(readId);
+                         free(readFirst);
+                         free(readLast);
+                         free(readGPA);
+                         free(readMajor);
+                         fclose(fp);
                          printf("FAILED TO PARSE FILE\n");
                          exit(0);
                  }
@@ -360,11 +364,27 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                  int valueOfID = getValueOfId(readId);
                  if(valueOfID <= 0)
                  {
+                         free(lineByLine);
+                         free(command);
+                         free(readId);
+                         free(readFirst);
+                         free(readLast);
+                         free(readGPA);
+                         free(readMajor);
+                         fclose(fp);
                          printf("FAILED TO PARSE FILE\n");
                          exit(0);
                  }
                  if(checkIfAllInts(readId) == 0)
                  {
+                         free(lineByLine);
+                         free(command);
+                         free(readId);
+                         free(readFirst);
+                         free(readLast);
+                         free(readGPA);
+                         free(readMajor);
+                         fclose(fp);
                          printf("FAILED TO PARSE FILE\n");
                          exit(0);
                  }
@@ -372,11 +392,27 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                  int lengthOfFirstName = getStringLength(readFirst);
                  if(lengthOfFirstName > 10 || lengthOfFirstName < 3)
                  {
+                         free(lineByLine);
+                         free(command);
+                         free(readId);
+                         free(readFirst);
+                         free(readLast);
+                         free(readGPA);
+                         free(readMajor);
+                         fclose(fp);
                          printf("FAILED TO PARSE FILE\n");
                          exit(0);
                  }
                  if(checkIfAllChars(readFirst) == 0)
                  {
+                         free(lineByLine);
+                         free(command);
+                         free(readId);
+                         free(readFirst);
+                         free(readLast);
+                         free(readGPA);
+                         free(readMajor);
+                         fclose(fp);
                          printf("FAILED TO PARSE FILE\n");
                          exit(0);
                  }
@@ -384,11 +420,27 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                  int lengthOfLastName = getStringLength(readLast);
                  if(lengthOfLastName > 10 || lengthOfLastName < 3)
                  {
+                         free(lineByLine);
+                         free(command);
+                         free(readId);
+                         free(readFirst);
+                         free(readLast);
+                         free(readGPA);
+                         free(readMajor);
+                         fclose(fp);
                          printf("FAILED TO PARSE FILE\n");
                          exit(0);
                  }
                  if(checkIfAllChars(readLast) == 0)
                  {
+                         free(lineByLine);
+                         free(command);
+                         free(readId);
+                         free(readFirst);
+                         free(readLast);
+                         free(readGPA);
+                         free(readMajor);
+                         fclose(fp);
                          printf("FAILED TO PARSE FILE\n");
                          exit(0);
                  }
@@ -396,11 +448,27 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                  int lengthOfGPA = getStringLength(readGPA);
                  if(lengthOfGPA != 4)
                  {
+                         free(lineByLine);
+                         free(command);
+                         free(readId);
+                         free(readFirst);
+                         free(readLast);
+                         free(readGPA);
+                         free(readMajor);
+                         fclose(fp);
                          printf("FAILED TO PARSE FILE\n");
                          exit(0);
                  }
                  if(checkIfValidGPA(readGPA) == 0)
                  {
+                         free(lineByLine);
+                         free(command);
+                         free(readId);
+                         free(readFirst);
+                         free(readLast);
+                         free(readGPA);
+                         free(readMajor);
+                         fclose(fp);
                          printf("FAILED TO PARSE FILE\n");
                          exit(0);
                  }
@@ -408,11 +476,27 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                  int lengthOfMajor = getStringLength(readMajor);
                  if(lengthOfMajor != 3)
                  {
+                         free(lineByLine);
+                         free(command);
+                         free(readId);
+                         free(readFirst);
+                         free(readLast);
+                         free(readGPA);
+                         free(readMajor);
+                         fclose(fp);
                          printf("FAILED TO PARSE FILE\n");
                          exit(0);
                  }
                  if(checkIfAllChars(readMajor) == 0)
                  {
+                         free(lineByLine);
+                         free(command);
+                         free(readId);
+                         free(readFirst);
+                         free(readLast);
+                         free(readGPA);
+                         free(readMajor);
+                         fclose(fp);
                          printf("FAILED TO PARSE FILE\n");
                          exit(0);
                  }
@@ -435,6 +519,14 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                  {
                    if(readId == NULL || readFirst == NULL || readLast == NULL || readGPA == NULL || readMajor == NULL)
                    {
+                           free(lineByLine);
+                           free(command);
+                           free(readId);
+                           free(readFirst);
+                           free(readLast);
+                           free(readGPA);
+                           free(readMajor);
+                           fclose(fp);
                            printf("FAILED TO PARSE FILE\n");
                            exit(0);
                    }
@@ -442,11 +534,27 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                    int valueOfID = getValueOfId(readId);
                    if(valueOfID <= 0)
                    {
+                           free(lineByLine);
+                           free(command);
+                           free(readId);
+                           free(readFirst);
+                           free(readLast);
+                           free(readGPA);
+                           free(readMajor);
+                           fclose(fp);
                            printf("FAILED TO PARSE FILE\n");
                            exit(0);
                    }
                    if(checkIfAllInts(readId) == 0)
                    {
+                           free(lineByLine);
+                           free(command);
+                           free(readId);
+                           free(readFirst);
+                           free(readLast);
+                           free(readGPA);
+                           free(readMajor);
+                           fclose(fp);
                            printf("FAILED TO PARSE FILE\n");
                            exit(0);
                    }
@@ -454,11 +562,27 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                    int lengthOfFirstName = getStringLength(readFirst);
                    if(lengthOfFirstName > 10 || lengthOfFirstName < 3)
                    {
+                           free(lineByLine);
+                           free(command);
+                           free(readId);
+                           free(readFirst);
+                           free(readLast);
+                           free(readGPA);
+                           free(readMajor);
+                           fclose(fp);
                            printf("FAILED TO PARSE FILE\n");
                            exit(0);
                    }
                    if(checkIfAllChars(readFirst) == 0)
                    {
+                           free(lineByLine);
+                           free(command);
+                           free(readId);
+                           free(readFirst);
+                           free(readLast);
+                           free(readGPA);
+                           free(readMajor);
+                           fclose(fp);
                            printf("FAILED TO PARSE FILE\n");
                            exit(0);
                    }
@@ -466,11 +590,27 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                    int lengthOfLastName = getStringLength(readLast);
                    if(lengthOfLastName > 10 || lengthOfLastName < 3)
                    {
+                           free(lineByLine);
+                           free(command);
+                           free(readId);
+                           free(readFirst);
+                           free(readLast);
+                           free(readGPA);
+                           free(readMajor);
+                           fclose(fp);
                            printf("FAILED TO PARSE FILE\n");
                            exit(0);
                    }
                    if(checkIfAllChars(readLast) == 0)
                    {
+                           free(lineByLine);
+                           free(command);
+                           free(readId);
+                           free(readFirst);
+                           free(readLast);
+                           free(readGPA);
+                           free(readMajor);
+                           fclose(fp);
                            printf("FAILED TO PARSE FILE\n");
                            exit(0);
                    }
@@ -478,11 +618,27 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                    int lengthOfGPA = getStringLength(readGPA);
                    if(lengthOfGPA != 4)
                    {
+                           free(lineByLine);
+                           free(command);
+                           free(readId);
+                           free(readFirst);
+                           free(readLast);
+                           free(readGPA);
+                           free(readMajor);
+                           fclose(fp);
                            printf("FAILED TO PARSE FILE\n");
                            exit(0);
                    }
                    if(checkIfValidGPA(readGPA) == 0)
                    {
+                           free(lineByLine);
+                           free(command);
+                           free(readId);
+                           free(readFirst);
+                           free(readLast);
+                           free(readGPA);
+                           free(readMajor);
+                           fclose(fp);
                            printf("FAILED TO PARSE FILE\n");
                            exit(0);
                    }
@@ -490,6 +646,14 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                    int lengthOfMajor = getStringLength(readMajor);
                    if(lengthOfMajor != 3)
                    {
+                           free(lineByLine);
+                           free(command);
+                           free(readId);
+                           free(readFirst);
+                           free(readLast);
+                           free(readGPA);
+                           free(readMajor);
+                           fclose(fp);
                            printf("FAILED TO PARSE FILE\n");
                            exit(0);
                    }
@@ -508,11 +672,27 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                    int valueOfID = getValueOfId(readId);
                    if(valueOfID <= 0)
                    {
+                           free(lineByLine);
+                           free(command);
+                           free(readId);
+                           free(readFirst);
+                           free(readLast);
+                           free(readGPA);
+                           free(readMajor);
+                           fclose(fp);
                            printf("FAILED TO PARSE FILE\n");
                            exit(0);
                    }
                    if(checkIfAllInts(readId) == 0)
                    {
+                           free(lineByLine);
+                           free(command);
+                           free(readId);
+                           free(readFirst);
+                           free(readLast);
+                           free(readGPA);
+                           free(readMajor);
+                           fclose(fp);
                            printf("FAILED TO PARSE FILE\n");
                            exit(0);
                    }
