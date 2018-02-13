@@ -328,7 +328,7 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
       }
       pointer = pointer->next;
     }
-    printf("STUDENT RECORDS CANNOT BE DELETED NOR UPDATED\n");
+    printf("STUDENT RECORD CANNOT BE DELETED NOR UPDATED\n");
     exit(1);
   }
 
@@ -353,7 +353,7 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
     student_records* pointer2 = head;
     if(pointer2 == NULL)
     {
-      printf("STUDENT RECORDS CANNOT BE DELETED NOR UPDATED\n");
+      printf("STUDENT RECORD CANNOT BE DELETED NOR UPDATED\n");
       exit(1);
     }
     if(pointer2->id == valueOfID)
@@ -387,14 +387,14 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
       }
       pointer2 = pointer2->next;
     }
-    printf("STUDENT RECORDS CANNOT BE DELETED NOR UPDATED\n");
+    printf("STUDENT RECORD CANNOT BE DELETED NOR UPDATED\n");
     exit(1);
   }
          int main(int argc, char** argv) {
            /*
            * Dummy values
            */
-           student_records* head = NULL;
+           student_records* head;
            /*
            * This formatting for the string
            * that you are expected to follow
