@@ -434,8 +434,14 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
            fp = fopen(inputFile, "r");
            if(fp == NULL)
            {
-              printf("OTHER ERROR");
+              printf("FAILED TO PARSE FILE\n");
               exit(1);
+           }
+
+           if(access(inputFile, R_OK) != -1)
+           {
+             printf("FAILED TO PARSE FILE\n");
+             exit(1);
            }
 
            char* lineByLine = malloc(255);
