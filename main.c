@@ -511,7 +511,14 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                          printf("FAILED TO PARSE FILE\n");
                          exit(1);
                  }
-                 add(head, readId, readFirst, readLast, readGPA, readMajor);
+                 if(head == NULL)
+                 {
+                    head = create(readId, readFirst, readLast, readGPA, readMajor);
+                 }
+                 else
+                 {
+                   add(head, readId, readFirst, readLast, readGPA, readMajor);
+                 }
                  }
                  else if(compareStrings(updateCommand, command) == 1)
                  {
