@@ -513,7 +513,8 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                  }
                  if(head == NULL)
                  {
-                    head = create(readId, readFirst, readLast, readGPA, readMajor);
+		    float valueOfGPA = getValueOfGPA(readGPA);
+                    head = create(valueOfID, readFirst, readLast, valueOfGPA , readMajor);
                  }
                  else
                  {
