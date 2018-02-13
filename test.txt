@@ -1,3 +1,7 @@
-ADD 3 john doe 3.43 AMS
-ADD 5 mary jane 3.87 ART
-UPDATE 3 john Wonka 3.41 AMS
+ADD 3 john doe 3.43 asd
+ADD 5 mary jane 3.87 aws
+ADD 6 mardy jane 3.87 dwa
+ADD 4 johfn doe 3.43 Ads
+ADD 17 margy jane 3.87 ART
+ADD 10 johhn doe 3.43 AMS
+ADD 13 marhy jane 3.87 ART

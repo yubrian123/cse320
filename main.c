@@ -148,72 +148,7 @@ void printCertainRecord(student_records* cursor)
 
 void add(student_records* head, char* id, char* first_name, char* last_name, char* gpa, char* major)
 {
-    // Check if anything  student record u trying to correct is missing an arguement
-    if(id == NULL || first_name == NULL || last_name == NULL || gpa == NULL || major == NULL)
-    {
-            printf("OTHER ERROR\n");
-            exit(1);
-    }
-    //check if valid id
     int valueOfID = getValueOfId(id);
-    if(valueOfID <= 0)
-    {
-            printf("OTHER ERROR\n");
-            exit(1);
-    }
-    if(checkIfAllInts(id) == 0)
-    {
-            printf("OTHER ERROR\n");
-            exit(1);
-    }
-    //check if valid first name
-    int lengthOfFirstName = getStringLength(first_name);
-    if(lengthOfFirstName > 10 || lengthOfFirstName < 3)
-    {
-            printf("OTHER ERROR\n");
-            exit(1);
-    }
-    if(checkIfAllChars(first_name) == 0)
-    {
-            printf("OTHER ERROR\n");
-            exit(1);
-    }
-    //check if valid last name
-    int lengthOfLastName = getStringLength(last_name);
-    if(lengthOfLastName > 10 || lengthOfLastName < 3)
-    {
-            printf("OTHER ERROR\n");
-            exit(1);
-    }
-    if(checkIfAllChars(last_name) == 0)
-    {
-            printf("OTHER ERROR\n");
-            exit(1);
-    }
-    //check if gpa is valid
-    int lengthOfGPA = getStringLength(gpa);
-    if(lengthOfGPA != 4)
-    {
-            printf("OTHER ERROR\n");
-            exit(1);
-    }
-    if(checkIfValidGPA(gpa) == 0)
-    {
-            printf("OTHER ERROR\n");
-            exit(1);
-    }
-    //check if valid major
-    int lengthOfMajor = getStringLength(major);
-    if(lengthOfMajor != 3)
-    {
-            printf("OTHER ERROR\n");
-            exit(1);
-    }
-    if(checkIfAllChars(major) == 0)
-    {
-            printf("OTHER ERROR\n");
-            exit(1);
-    }
     student_records* pointer = head;
     while(pointer != NULL)
     {
@@ -248,72 +183,7 @@ void add(student_records* head, char* id, char* first_name, char* last_name, cha
 }
 void update(student_records* head, char* id, char* first_name, char* last_name, char* gpa, char* major)
 {
-    // Check if anything  student record u trying to correct is missing an arguement
-    if(id == NULL || first_name == NULL || last_name == NULL || gpa == NULL || major == NULL)
-    {
-            printf("OTHER ERROR\n");
-            exit(1);
-    }
-    //check if valid id
     int valueOfID = getValueOfId(id);
-    if(valueOfID <= 0)
-    {
-            printf("OTHER ERROR\n");
-            exit(1);
-    }
-    if(checkIfAllInts(id) == 0)
-    {
-            printf("OTHER ERROR\n");
-            exit(1);
-    }
-    //check if valid first name
-    int lengthOfFirstName = getStringLength(first_name);
-    if(lengthOfFirstName > 10 || lengthOfFirstName < 3)
-    {
-            printf("OTHER ERROR\n");
-            exit(1);
-    }
-    if(checkIfAllChars(first_name) == 0)
-    {
-            printf("OTHER ERROR\n");
-            exit(1);
-    }
-    //check if valid last name
-    int lengthOfLastName = getStringLength(last_name);
-    if(lengthOfLastName > 10 || lengthOfLastName < 3)
-    {
-            printf("OTHER ERROR\n");
-            exit(1);
-    }
-    if(checkIfAllChars(last_name) == 0)
-    {
-            printf("OTHER ERROR\n");
-            exit(1);
-    }
-    //check if gpa is valid
-    int lengthOfGPA = getStringLength(gpa);
-    if(lengthOfGPA != 4)
-    {
-            printf("OTHER ERROR\n");
-            exit(1);
-    }
-    if(checkIfValidGPA(gpa) == 0)
-    {
-            printf("OTHER ERROR\n");
-            exit(1);
-    }
-    //check if valid major
-    int lengthOfMajor = getStringLength(major);
-    if(lengthOfMajor != 3)
-    {
-            printf("OTHER ERROR\n");
-            exit(1);
-    }
-    if(checkIfAllChars(major) == 0)
-    {
-            printf("OTHER ERROR\n");
-            exit(1);
-    }
     student_records* pointer = head;
     float valueOfGPA = getValueOfGPA(gpa);
     while(pointer != NULL)
@@ -401,6 +271,16 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
         string++;
     }
   }
+
+  void makeMajorCaps(char* string)
+  {
+    *string = toupper(*string);
+    string++;
+    *string = toupper(*string);
+    string++;
+    *string = toupper(*string);
+    string++;
+  }
          int main(int argc, char** argv) {
            /*
            * Dummy values
@@ -424,10 +304,10 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
            int mFlag = 0;
            int oFlag = 0;
 
-           char* iArg;
-           char* fArg;
-           char* mArg;
-           char* oArg;
+           char* iArg = malloc(255);
+           char* fArg = malloc(255);
+           char* mArg = malloc(255);
+           char* oArg = malloc(255);
 
            char* inputFile = *(argv +1);
            FILE *fp;
@@ -435,12 +315,6 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
            if(fp == NULL)
            {
               printf("FAILED TO PARSE FILE\n");
-              exit(1);
-           }
-
-           if(inputFile == NULL)
-           {
-              printf("NO QUERY PROVIDED\n");
               exit(1);
            }
 
@@ -543,6 +417,7 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                  }
                  changeToCamelCase(readFirst);
                  changeToCamelCase(readLast);
+                 makeMajorCaps(readMajor);
                  if(head == NULL)
                  {
                     float valueOfGPA = getValueOfGPA(readGPA);
@@ -622,6 +497,7 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                    }
                    changeToCamelCase(readFirst);
                    changeToCamelCase(readLast);
+                   makeMajorCaps(readMajor);
                    update(head, readId, readFirst, readLast, readGPA, readMajor);
                  }
                  else if(compareStrings(deleteCommand, command) == 1)
@@ -645,6 +521,14 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                   exit(1);
                 }
           }
+          free(lineByLine);
+          free(command);
+          free(readId);
+          free(readFirst);
+          free(readLast);
+          free(readGPA);
+          free(readMajor);
+          fclose(fp);
 
            while((c = getopt(argc, argv, "vi:f:m:o:")) != -1)
            {
@@ -721,8 +605,12 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                          }
 
                   }
-                  else
-                        printf("NO QUERY PROVIDED\n");
+   }
+
+   if(vFlag == 0 && fFlag == 0 && mFlag == 0 && oFlag == 0)
+   {
+     printf("NO QUERY PROVIDED\n");
+     exit(1);
    }
 
    if(vFlag == 1)
@@ -752,8 +640,27 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
     }
     else if(iFlag == 1)
     {
+      if(fFlag == 1 && mFlag ==1)
+      {
+          makeMajorCaps(mArg);
+          changeToCamelCase(fArg);
+          student_records* pointer = head;
+          while(pointer != NULL)
+          {
+            if(pointer->id == getValueOfId(iArg))
+            {
+              if((compareStrings(pointer->last_name, fArg) == 1) && (compareStrings(pointer->major, mArg) == 1))
+              {
+                  printCertainRecord(pointer);
+                  exit(0);
+              }
+            }
+            pointer = pointer->next;
+          }
+      }
       if(fFlag == 1)
       {
+        changeToCamelCase(fArg);
         student_records* pointer = head;
         while(pointer != NULL)
         {
@@ -770,9 +677,10 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
         printf("STUDENT RECORD NOT FOUND\n");
         exit(0);
       }
-        if(mFlag == 1)
+      if(mFlag == 1)
         {
           student_records* pointer = head;
+          makeMajorCaps(mArg);
           while(pointer != NULL)
           {
             if(pointer->id = getValueOfId(iArg))
