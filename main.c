@@ -394,38 +394,7 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
            /*
            * Dummy values
            */
-
-           int id = 1;
-           char* first_name = "Sergey";
-           char* last_name = "Madaminov";
-           float gpa = 3.41;
-           char* major = "CSE";
-           student_records* head = create(id, first_name, last_name, gpa, major);
-
-           char* id1 = "2";
-           char* first_name1 = "Sesdsay";
-           char* last_name1 = "Madasdmv";
-           char* gpa1 = "3.11";
-           char* major1 = "CHE";
-           add(head, id1, first_name1, last_name1, gpa1, major1);
-
-           char* id2 = "5";
-           char* first_name2 = "Sesadsay";
-           char* last_name2 = "Madadsdmv";
-           char* gpa2 = "3.11";
-           char* major2 = "CDE";
-           add(head, id2, first_name2, last_name2, gpa2, major2);
-
-           char* id3 = "3";
-           char* first_name3 = "Ssadssay";
-           char* last_name3 = "Madfssdmv";
-           char* gpa3 = "3.12";
-           char* major3 = "CDE";
-           add(head, id3, first_name3, last_name3, gpa3, major3);
-
-           update(head, "2", "Sama", "Sama", "3.12", "CED");
-           head = delete(head, "1");
-
+           student_records* head = NULL;
            /*
            * This formatting for the string
            * that you are expected to follow
