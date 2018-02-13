@@ -20,7 +20,7 @@ student_records* create(int id, char* first_name, char* last_name, float gpa, ch
         if(new_student_records == NULL)
         {
                 printf("Error creating a new Student Record.\n");
-                exit(0);
+                exit(1);
         }
         new_student_records->id = id;
         new_student_records->first_name = first_name;
@@ -613,6 +613,12 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
      exit(1);
    }
 
+   if(vFlag == 0 && fFlag == 0 && mFlag == 0 && oFlag ==1)
+   {
+     printf("OTHER ERROR\n");
+     exit(1);
+   }
+
    if(vFlag == 1)
    {
      if(iFlag == 1)
@@ -652,11 +658,12 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
               if((compareStrings(pointer->last_name, fArg) == 1) && (compareStrings(pointer->major, mArg) == 1))
               {
                   printCertainRecord(pointer);
-                  exit(0);
+                  exit(1);
               }
             }
             pointer = pointer->next;
           }
+          printf("STUDENT RECORD NOT FOUND\n");
       }
       if(fFlag == 1)
       {
@@ -669,13 +676,13 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
             if(compareStrings(pointer->last_name, fArg) == 1)
             {
                 printCertainRecord(pointer);
-                exit(0);
+                exit(1);
             }
           }
           pointer = pointer->next;
         }
         printf("STUDENT RECORD NOT FOUND\n");
-        exit(0);
+        exit(1);
       }
       if(mFlag == 1)
         {
@@ -688,14 +695,18 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
               if(compareStrings(pointer->major, mArg) == 1)
               {
                   printCertainRecord(pointer);
-                  exit(0);
+                  exit(1);
               }
             }
             pointer = pointer->next;
           }
           printf("STUDENT RECORD NOT FOUND\n");
-          exit(0);
+          exit(1);
         }
+      }
+      else if(fFlag == 1)
+      {
+
       }
    return 0;
  }
