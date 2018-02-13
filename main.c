@@ -543,7 +543,6 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                          exit(1);
                  }
                  add(head, readId, readFirst, readLast, readGPA, readMajor);
-                 printf("Added Student\n");
                  }
                  else if(compareStrings(updateCommand, command) == 1)
                  {
