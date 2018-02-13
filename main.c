@@ -20,7 +20,7 @@ student_records* create(int id, char* first_name, char* last_name, float gpa, ch
         if(new_student_records == NULL)
         {
                 printf("Error creating a new Student Record.\n");
-                exit(1);
+                exit(0);
         }
         new_student_records->id = id;
         new_student_records->first_name = first_name;
@@ -155,7 +155,7 @@ void add(student_records* head, char* id, char* first_name, char* last_name, cha
       if(pointer->id == valueOfID)
       {
         printf("ID NOT UNIQUE\n");
-        exit(1);
+        exit(0);
       }
       pointer = pointer->next;
     }
@@ -199,7 +199,7 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
       pointer = pointer->next;
     }
     printf("STUDENT RECORD CANNOT BE DELETED NOR UPDATED\n");
-    exit(1);
+    exit(0);
   }
 
   student_records* delete(student_records* head, char* id)
@@ -207,24 +207,24 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
     if(id == NULL)
     {
             printf("OTHER ERROR\n");
-            exit(1);
+            exit(0);
     }
     int valueOfID = getValueOfId(id);
     if(valueOfID <= 0)
     {
             printf("OTHER ERROR\n");
-            exit(1);
+            exit(0);
     }
     if(checkIfAllInts(id) == 0)
     {
             printf("OTHER ERROR\n");
-            exit(1);
+            exit(0);
     }
     student_records* pointer2 = head;
     if(pointer2 == NULL)
     {
       printf("STUDENT RECORD CANNOT BE DELETED NOR UPDATED\n");
-      exit(1);
+      exit(0);
     }
     if(pointer2->id == valueOfID)
     {
@@ -258,7 +258,7 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
       pointer2 = pointer2->next;
     }
     printf("STUDENT RECORD CANNOT BE DELETED NOR UPDATED\n");
-    exit(1);
+    exit(0);
   }
 
   void changeToCamelCase(char* string)
@@ -303,6 +303,7 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
            int fFlag = 0;
            int mFlag = 0;
            int oFlag = 0;
+           int size = 0;
 
            char* iArg = malloc(255);
            char* fArg = malloc(255);
@@ -315,13 +316,13 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
            if(fp == NULL)
            {
               printf("FAILED TO PARSE FILE\n");
-              exit(1);
+              exit(0);
            }
 
            if(access(inputFile, F_OK) == -1)
            {
              printf("FAILED TO PARSE FILE\n");
-             exit(1);
+             exit(0);
            }
 
            char* lineByLine = malloc(255);
@@ -353,79 +354,81 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                  if(readId == NULL || readFirst == NULL || readLast == NULL || readGPA == NULL || readMajor == NULL)
                  {
                          printf("FAILED TO PARSE FILE\n");
-                         exit(1);
+                         exit(0);
                  }
                  //check if valid id
                  int valueOfID = getValueOfId(readId);
                  if(valueOfID <= 0)
                  {
                          printf("FAILED TO PARSE FILE\n");
-                         exit(1);
+                         exit(0);
                  }
                  if(checkIfAllInts(readId) == 0)
                  {
                          printf("FAILED TO PARSE FILE\n");
-                         exit(1);
+                         exit(0);
                  }
                  //check if valid first name
                  int lengthOfFirstName = getStringLength(readFirst);
                  if(lengthOfFirstName > 10 || lengthOfFirstName < 3)
                  {
                          printf("FAILED TO PARSE FILE\n");
-                         exit(1);
+                         exit(0);
                  }
                  if(checkIfAllChars(readFirst) == 0)
                  {
                          printf("FAILED TO PARSE FILE\n");
-                         exit(1);
+                         exit(0);
                  }
                  //check if valid last name
                  int lengthOfLastName = getStringLength(readLast);
                  if(lengthOfLastName > 10 || lengthOfLastName < 3)
                  {
                          printf("FAILED TO PARSE FILE\n");
-                         exit(1);
+                         exit(0);
                  }
                  if(checkIfAllChars(readLast) == 0)
                  {
                          printf("FAILED TO PARSE FILE\n");
-                         exit(1);
+                         exit(0);
                  }
                  //check if gpa is valid
                  int lengthOfGPA = getStringLength(readGPA);
                  if(lengthOfGPA != 4)
                  {
                          printf("FAILED TO PARSE FILE\n");
-                         exit(1);
+                         exit(0);
                  }
                  if(checkIfValidGPA(readGPA) == 0)
                  {
                          printf("FAILED TO PARSE FILE\n");
-                         exit(1);
+                         exit(0);
                  }
                  //check if valid major
                  int lengthOfMajor = getStringLength(readMajor);
                  if(lengthOfMajor != 3)
                  {
                          printf("FAILED TO PARSE FILE\n");
-                         exit(1);
+                         exit(0);
                  }
                  if(checkIfAllChars(readMajor) == 0)
                  {
                          printf("FAILED TO PARSE FILE\n");
-                         exit(1);
+                         exit(0);
                  }
                  changeToCamelCase(readFirst);
                  changeToCamelCase(readLast);
                  makeMajorCaps(readMajor);
-                 if(head == NULL)
+                 if(size == 0)
                  {
                     float valueOfGPA = getValueOfGPA(readGPA);
                     head = create(valueOfID, readFirst, readLast, valueOfGPA , readMajor);
+                    size++;
                  }
                 else
                 {
                   add(head, readId, readFirst, readLast, readGPA, readMajor);
+                  size++;
                 }
                  }
                  else if(compareStrings(updateCommand, command) == 1)
@@ -433,67 +436,67 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                    if(readId == NULL || readFirst == NULL || readLast == NULL || readGPA == NULL || readMajor == NULL)
                    {
                            printf("FAILED TO PARSE FILE\n");
-                           exit(1);
+                           exit(0);
                    }
                    //check if valid id
                    int valueOfID = getValueOfId(readId);
                    if(valueOfID <= 0)
                    {
                            printf("FAILED TO PARSE FILE\n");
-                           exit(1);
+                           exit(0);
                    }
                    if(checkIfAllInts(readId) == 0)
                    {
                            printf("FAILED TO PARSE FILE\n");
-                           exit(1);
+                           exit(0);
                    }
                    //check if valid first name
                    int lengthOfFirstName = getStringLength(readFirst);
                    if(lengthOfFirstName > 10 || lengthOfFirstName < 3)
                    {
                            printf("FAILED TO PARSE FILE\n");
-                           exit(1);
+                           exit(0);
                    }
                    if(checkIfAllChars(readFirst) == 0)
                    {
                            printf("FAILED TO PARSE FILE\n");
-                           exit(1);
+                           exit(0);
                    }
                    //check if valid last name
                    int lengthOfLastName = getStringLength(readLast);
                    if(lengthOfLastName > 10 || lengthOfLastName < 3)
                    {
                            printf("FAILED TO PARSE FILE\n");
-                           exit(1);
+                           exit(0);
                    }
                    if(checkIfAllChars(readLast) == 0)
                    {
                            printf("FAILED TO PARSE FILE\n");
-                           exit(1);
+                           exit(0);
                    }
                    //check if gpa is valid
                    int lengthOfGPA = getStringLength(readGPA);
                    if(lengthOfGPA != 4)
                    {
                            printf("FAILED TO PARSE FILE\n");
-                           exit(1);
+                           exit(0);
                    }
                    if(checkIfValidGPA(readGPA) == 0)
                    {
                            printf("FAILED TO PARSE FILE\n");
-                           exit(1);
+                           exit(0);
                    }
                    //check if valid major
                    int lengthOfMajor = getStringLength(readMajor);
                    if(lengthOfMajor != 3)
                    {
                            printf("FAILED TO PARSE FILE\n");
-                           exit(1);
+                           exit(0);
                    }
                    if(checkIfAllChars(readMajor) == 0)
                    {
                            printf("FAILED TO PARSE FILE\n");
-                           exit(1);
+                           exit(0);
                    }
                    changeToCamelCase(readFirst);
                    changeToCamelCase(readLast);
@@ -506,19 +509,20 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                    if(valueOfID <= 0)
                    {
                            printf("FAILED TO PARSE FILE\n");
-                           exit(1);
+                           exit(0);
                    }
                    if(checkIfAllInts(readId) == 0)
                    {
                            printf("FAILED TO PARSE FILE\n");
-                           exit(1);
+                           exit(0);
                    }
                    head = delete(head, readId);
+                   size++;
                  }
                  else
                 {
                   printf("FAILED TO PARSE FILE\n");
-                  exit(1);
+                  exit(0);
                 }
           }
           free(lineByLine);
@@ -541,18 +545,18 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                          if(iArg == NULL)
                          {
                                  printf("OTHER ERROR\n");
-                                 exit(1);
+                                 exit(0);
                          }
                          printId = getValueOfId(iArg);
                          if(printId <= 0)
                          {
                                  printf("OTHER ERROR\n");
-                                 exit(1);
+                                 exit(0);
                          }
                          else if(checkIfAllInts(iArg) == 0)
                          {
                                  printf("OTHER ERROR\n");
-                                 exit(1);
+                                 exit(0);
                          }
                  }
                  else if(c == 'f'){
@@ -561,18 +565,18 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                          if(fArg == NULL)
                          {
                                  printf("OTHER ERROR\n");
-                                 exit(1);
+                                 exit(0);
                          }
                          lengthOfLastName = getStringLength(fArg);
                          if(lengthOfLastName > 10 || lengthOfLastName < 3)
                          {
                                  printf("OTHER ERROR\n");
-                                 exit(1);
+                                 exit(0);
                          }
                          else if(checkIfAllChars(fArg) == 0)
                          {
                                  printf("OTHER ERROR\n");
-                                 exit(1);
+                                 exit(0);
                          }
                  }
                  else if(c == 'm'){
@@ -581,18 +585,18 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                          if(mArg == NULL)
                          {
                                  printf("OTHER ERROR\n");
-                                 exit(1);
+                                 exit(0);
                          }
                          lengthOfMajor = getStringLength(mArg);
                          if(lengthOfMajor != 3)
                          {
                                  printf("OTHER ERROR\n");
-                                 exit(1);
+                                 exit(0);
                          }
                          else if(checkIfAllChars(mArg) == 0)
                          {
                                  printf("OTHER ERROR\n");
-                                 exit(1);
+                                 exit(0);
                          }
                   }
                   else if(c == 'o'){
@@ -601,22 +605,39 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                          if(oArg == NULL)
                          {
                            printf("OTHER ERROR\n");
-                           exit(1);
+                           exit(0);
                          }
+                         if(access(oArg, F_OK) != -1)
+                         {
+                             char* prompt = malloc(255);
+                             FILE *oFile;
+                             oFile = fopen(oArg, "r");
+                             if(oFile != NULL)
+                             {
+                               printf ("File Exist, Are You Sure You Want To Overwrite it? (y/n) \n");
+                               scanf ("%s", prompt);
+                               if(*prompt == 'n')
+                               {
+                                 printf("FILE EXIST\n");
+                                 exit(0);
+                               }
+                             }
+                             fclose(oFile);
+                        }
 
                   }
    }
 
-   if(vFlag == 0 && fFlag == 0 && mFlag == 0 && oFlag == 0)
+   if(vFlag == 0 && fFlag == 0 && mFlag == 0 && oFlag == 0 && iFlag == 0)
    {
      printf("NO QUERY PROVIDED\n");
-     exit(1);
+     exit(0);
    }
 
-   if(vFlag == 0 && fFlag == 0 && mFlag == 0 && oFlag ==1)
+   if(iFlag == 0 && vFlag == 0 && fFlag == 0 && mFlag == 0 && oFlag ==1)
    {
      printf("OTHER ERROR\n");
-     exit(1);
+     exit(0);
    }
 
    if(vFlag == 1)
@@ -624,26 +645,174 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
      if(iFlag == 1)
      {
        printf("OTHER ERROR\n");
-       exit(1);
+       exit(0);
      }
      else if(fFlag == 1)
      {
        printf("OTHER ERROR\n");
-       exit(1);
+       exit(0);
      }
      else if(mFlag == 1)
      {
        printf("OTHER ERROR\n");
-       exit(1);
+       exit(0);
      }
      else if(oFlag == 1)
      {
-       //parseToFile();
+       printAll(head);
+       student_records* pointer = head;
+       FILE *file_pointer;
+       file_pointer = fopen(oArg, "w");
+       while(pointer != NULL)
+       {
+         fprintf(file_pointer, "%d %s %s %.2f %s\n", pointer->id, pointer->first_name, pointer->last_name, pointer->gpa, pointer->major);
+         pointer = pointer->next;
+       }
+       fclose(file_pointer);
      }
      else
         printAll(head);
-        exit(1);
+        exit(0);
     }
+
+    else if(oFlag == 1)
+    {
+      FILE *file_pointer;
+      file_pointer = fopen(oArg, "w");
+      student_records* pointer = head;
+      if(iFlag == 1 &&fFlag == 1 && mFlag ==1)
+      {
+        makeMajorCaps(mArg);
+        changeToCamelCase(fArg);
+        while(pointer != NULL)
+        {
+          if(pointer->id == getValueOfId(iArg))
+          {
+            if((compareStrings(pointer->last_name, fArg) == 1) && (compareStrings(pointer->major, mArg) == 1))
+            {
+                fprintf(file_pointer, "%d %s %s %.2f %s\n", pointer->id, pointer->first_name, pointer->last_name, pointer->gpa, pointer->major);
+                fclose(file_pointer);
+                printCertainRecord(pointer);
+                exit(0);
+            }
+          }
+          pointer = pointer->next;
+        }
+      }
+        else if(iFlag == 1 && fFlag == 1)
+        {
+          changeToCamelCase(fArg);
+          while(pointer != NULL)
+          {
+            if(pointer->id == getValueOfId(iArg))
+            {
+              if(compareStrings(pointer->last_name, fArg) == 1)
+              {
+                  fprintf(file_pointer, "%d %s %s %.2f %s\n", pointer->id, pointer->first_name, pointer->last_name, pointer->gpa, pointer->major);
+                  fclose(file_pointer);
+                  printCertainRecord(pointer);
+                  exit(0);
+              }
+            }
+            pointer = pointer->next;
+          }
+        }
+        else if (iFlag == 1 && mFlag == 1)
+        {
+          makeMajorCaps(mArg);
+          while(pointer != NULL)
+          {
+            if(pointer->id == getValueOfId(iArg))
+            {
+              if(compareStrings(pointer->major, mArg) == 1)
+              {
+                  fprintf(file_pointer, "%d %s %s %.2f %s\n", pointer->id, pointer->first_name, pointer->last_name, pointer->gpa, pointer->major);
+                  fclose(file_pointer);
+                  printCertainRecord(pointer);
+                  exit(0);
+              }
+            }
+            pointer = pointer->next;
+          }
+        }
+        else if(fFlag == 1 && mFlag == 1)
+        {
+          makeMajorCaps(mArg);
+          changeToCamelCase(fArg);
+          int printedFM;
+          while(pointer != NULL)
+          {
+            if((compareStrings(pointer->last_name, fArg) == 1) && (compareStrings(pointer->major, mArg) == 1))
+            {
+                printedFM = 1;
+                fprintf(file_pointer, "%d %s %s %.2f %s\n", pointer->id, pointer->first_name, pointer->last_name, pointer->gpa, pointer->major);
+                printCertainRecord(pointer);
+            }
+            pointer = pointer->next;
+          }
+          if(printedFM != 1)
+          {
+            printf("STUDENT RECORD NOT FOUND\n");
+          }
+          fclose(file_pointer);
+          exit(0);
+        }
+        else if(iFlag == 1)
+        {
+          while(pointer != NULL)
+          {
+            if(pointer->id = getValueOfId(iArg))
+            {
+              printCertainRecord(pointer);
+              exit(0);
+            }
+            pointer = pointer->next;
+          }
+          printf("STUDENT RECORD NOT FOUND\n");
+        }
+        else if(fFlag == 1)
+        {
+          changeToCamelCase(fArg);
+          int printedFM;
+          while(pointer != NULL)
+          {
+            if(compareStrings(pointer->last_name, fArg) == 1)
+            {
+                printedFM = 1;
+                fprintf(file_pointer, "%d %s %s %.2f %s\n", pointer->id, pointer->first_name, pointer->last_name, pointer->gpa, pointer->major);
+                printCertainRecord(pointer);
+            }
+            pointer = pointer->next;
+          }
+          if(printedFM != 1)
+          {
+            printf("STUDENT RECORD NOT FOUND\n");
+          }
+          fclose(file_pointer);
+          exit(0);
+        }
+        else if(mFlag == 1)
+        {
+          makeMajorCaps(mArg);
+          int printedFM;
+          while(pointer != NULL)
+          {
+            if(compareStrings(pointer->major, mArg) == 1)
+            {
+                printedFM = 1;
+                fprintf(file_pointer, "%d %s %s %.2f %s\n", pointer->id, pointer->first_name, pointer->last_name, pointer->gpa, pointer->major);
+                printCertainRecord(pointer);
+            }
+            pointer = pointer->next;
+          }
+          if(printedFM != 1)
+          {
+            printf("STUDENT RECORD NOT FOUND\n");
+          }
+          fclose(file_pointer);
+          exit(0);
+        }
+      }
     else if(iFlag == 1)
     {
       if(fFlag == 1 && mFlag ==1)
@@ -658,14 +827,14 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
               if((compareStrings(pointer->last_name, fArg) == 1) && (compareStrings(pointer->major, mArg) == 1))
               {
                   printCertainRecord(pointer);
-                  exit(1);
+                  exit(0);
               }
             }
             pointer = pointer->next;
           }
           printf("STUDENT RECORD NOT FOUND\n");
       }
-      if(fFlag == 1)
+      else if(fFlag == 1)
       {
         changeToCamelCase(fArg);
         student_records* pointer = head;
@@ -676,37 +845,109 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
             if(compareStrings(pointer->last_name, fArg) == 1)
             {
                 printCertainRecord(pointer);
-                exit(1);
+                exit(0);
             }
           }
           pointer = pointer->next;
         }
         printf("STUDENT RECORD NOT FOUND\n");
-        exit(1);
+        exit(0);
       }
-      if(mFlag == 1)
+      else if(mFlag == 1)
         {
           student_records* pointer = head;
           makeMajorCaps(mArg);
           while(pointer != NULL)
           {
-            if(pointer->id = getValueOfId(iArg))
+            if(pointer->id == getValueOfId(iArg))
             {
               if(compareStrings(pointer->major, mArg) == 1)
               {
                   printCertainRecord(pointer);
-                  exit(1);
+                  exit(0);
               }
             }
             pointer = pointer->next;
           }
           printf("STUDENT RECORD NOT FOUND\n");
-          exit(1);
+          exit(0);
         }
+        else
+        {
+          student_records* pointer = head;
+          while(pointer != NULL)
+          {
+            if(pointer->id == getValueOfId(iArg))
+            {
+                printCertainRecord(pointer);
+                exit(0);
+            }
+            pointer = pointer->next;
+          }
+          printf("STUDENT RECORD NOT FOUND\n");
+          exit(0);
+        }
+      }
+      else if(fFlag == 1 && mFlag == 1)
+      {
+        makeMajorCaps(mArg);
+        changeToCamelCase(fArg);
+        student_records* pointer = head;
+        int printedFM;
+        while(pointer != NULL)
+        {
+            if((compareStrings(pointer->last_name, fArg) == 1) && (compareStrings(pointer->major, mArg) == 1))
+            {
+                printedFM = 1;
+                printCertainRecord(pointer);
+            }
+            pointer = pointer->next;
+        }
+        if(printedFM != 1)
+        {
+          printf("STUDENT RECORD NOT FOUND\n");
+        }
+        exit(0);
       }
       else if(fFlag == 1)
       {
-
+        student_records* pointer = head;
+        changeToCamelCase(fArg);
+        int printedF;
+        while(pointer != NULL)
+        {
+          if(compareStrings(pointer->last_name, fArg) == 1)
+          {
+              printedF = 1;
+              printCertainRecord(pointer);
+          }
+          pointer = pointer->next;
+        }
+        if(printedF != 1)
+        {
+          printf("STUDENT RECORD NOT FOUND\n");
+        }
+        exit(0);
+      }
+      else if(mFlag == 1)
+      {
+        student_records* pointer = head;
+        makeMajorCaps(mArg);
+        int printedM;
+        while(pointer != NULL)
+        {
+          if(compareStrings(pointer->major, mArg) == 1)
+          {
+              printedM = 1;
+              printCertainRecord(pointer);
+          }
+          pointer = pointer->next;
+        }
+        if(printedM != 1)
+        {
+          printf("STUDENT RECORD NOT FOUND\n");
+        }
+        exit(0);
       }
    return 0;
  }
