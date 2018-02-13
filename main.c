@@ -390,6 +390,17 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
     printf("STUDENT RECORD CANNOT BE DELETED NOR UPDATED\n");
     exit(1);
   }
+
+  void changeToCamelCase(char* string)
+  {
+    *string = toupper(*string);
+    string++;
+    while(*string != '\0')
+    {
+        *string = tolower(*string);
+        string++;
+    }
+  }
          int main(int argc, char** argv) {
            /*
            * Dummy values
@@ -440,6 +451,12 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
 
            while(fgets(lineByLine, 255, fp) != NULL)
            {
+             command = malloc(255);
+             readId = malloc(255);
+             readFirst = malloc(255);
+             readLast = malloc(255);
+             readGPA = malloc(255);
+             readMajor = malloc(255);
              sscanf(lineByLine, "%s %s %s %s %s %s", command, readId, readFirst, readLast, readGPA, readMajor);
              if(command == NULL)
              {
@@ -512,6 +529,8 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                          printf("FAILED TO PARSE FILE\n");
                          exit(1);
                  }
+                 changeToCamelCase(readFirst);
+                 changeToCamelCase(readLast);
                  if(head == NULL)
                  {
                     float valueOfGPA = getValueOfGPA(readGPA);
@@ -589,8 +608,9 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                            printf("FAILED TO PARSE FILE\n");
                            exit(1);
                    }
+                   changeToCamelCase(readFirst);
+                   changeToCamelCase(readLast);
                    update(head, readId, readFirst, readLast, readGPA, readMajor);
-                   printf("Update Command\n");
                  }
                  else if(compareStrings(deleteCommand, command) == 1)
                  {
