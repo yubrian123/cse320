@@ -438,7 +438,7 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
               exit(1);
            }
 
-           if(access(inputFile, F_OK) != -1)
+           if(access(inputFile, F_OK) == -1)
            {
              printf("FAILED TO PARSE FILE\n");
              exit(1);
