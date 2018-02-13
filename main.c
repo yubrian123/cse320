@@ -395,6 +395,7 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
            * Dummy values
            */
            student_records* head;
+
            /*
            * This formatting for the string
            * that you are expected to follow
@@ -513,13 +514,13 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
                  }
                  if(head == NULL)
                  {
-		    float valueOfGPA = getValueOfGPA(readGPA);
+                    float valueOfGPA = getValueOfGPA(readGPA);
                     head = create(valueOfID, readFirst, readLast, valueOfGPA , readMajor);
                  }
-                 else
-                 {
-                   add(head, readId, readFirst, readLast, readGPA, readMajor);
-                 }
+                else
+                {
+                  add(head, readId, readFirst, readLast, readGPA, readMajor);	
+                }
                  }
                  else if(compareStrings(updateCommand, command) == 1)
                  {
@@ -758,3 +759,4 @@ void update(student_records* head, char* id, char* first_name, char* last_name, 
       }
    return 0;
  }
+
